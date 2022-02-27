@@ -1,6 +1,7 @@
 package helpers
 
-func AddTask(command_args []string) (response string, err error) {
+func AddTask(command_args []string) (response string, err error) 
+	CreateNewTask(command_args[0], command_args[1])
 	return "Successfully Added Task.", nil
 }
 func RemoveTask(command_args []string) (response string, err error) {
