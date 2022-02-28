@@ -2,9 +2,11 @@ package helpers
 
 import (
 	"fmt"
+
 	"github.com/Bryce-Soghigian/bry-task-cli/persistence"
 )
-func AddTask(command_args []string) (response string, err error) 
+
+func AddTask(command_args []string) (response string, err error) {
 	persistence.CreateNewTask(command_args[1], command_args[3])
 	return "Successfully Added Task.", nil
 }
