@@ -2,6 +2,7 @@ package helpers
 
 import (
 	"errors"
+	"gorm.io/gorm"
 	"strings"
 )
 
@@ -33,7 +34,7 @@ func GetCommandParts(command_string string) (command_header string, command_type
 	return command_header, command_type, command_args
 }
 
-func CommandParser(command_string string) (response string, err error) {
+func CommandParser(command_string string, db *gorm.DB) (response string, err error) {
 
 	if len(command_string) < 9 {
 		return "", errors.New("invalid command string. its too short somethings missing")
@@ -46,9 +47,9 @@ func CommandParser(command_string string) (response string, err error) {
 	if command_type == "complete" {
 		return ModifyTask(command_args)
 	} else if command_type == "create" {
-		return AddTask(command_args)
+		return AddTask(command_args, db)
 	} else if command_type == "list" {
-		return ListTasks(command_args)
+		return ListTasks(db, command_args)
 	} else if command_type == "abort" {
 		return RemoveTask(command_args)
 	} else {
